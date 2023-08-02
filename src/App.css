@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+/* App.css */
+
+/* Center the content both horizontally and vertically */
+.app-container {
+  display: flex;
+  justify-content: center;
+  /*align-items: center;*/
+ /* min-height: 100vh;*/
+ 
+}
