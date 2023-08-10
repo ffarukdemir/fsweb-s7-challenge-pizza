@@ -9,6 +9,9 @@ const OrderForm = () => {
   const [secimlerPara, setSecimlerPara]=useState(0);
    const [siparis, setSiparis] = useState(false);
 
+   const availableToppings = ["Pepperoni", "Domates", "Mantar", "Yeşil Zeytin", "Ananas", "Mısır", "Turşu", "Sarımsak", "Sucuk", "Sosis"];
+
+
   const handleSubmit = (event) => {
    
     if (!boyut || !hamur) {
@@ -29,16 +32,13 @@ const OrderForm = () => {
 
   const handleToppingChange = (event) => {
     const selectedTopping = event.target.value;
-    if (event.target.checked) {
+   
       if (secimler.length < 5) {
         setSecimler([...secimler, selectedTopping]);
       } else {
         event.target.checked = false;
         alert("En fazla 5 malzeme seçebilirsiniz.");
-      }
-    } else {
-      setSecimler(secimler.filter((topping) => topping !== selectedTopping));
-    }
+          } 
   };
 
   useEffect(() => {
@@ -97,21 +97,19 @@ const OrderForm = () => {
           </div>
         </div>
   
-        <div style={{textAlign:"center"}}>
-              <h3>Ek Malzemeler</h3>
-              <p style={{ fontSize: "12px" }}>En fazla 5 malzeme seçebilirsiniz. Her malzeme extra 5 TL.</p>
-              <div style={{ display: "flex", flexWrap: "wrap" }}>
-                {availableToppings.map((topping) => (
-                  <label key={topping} style={{ width: "33%" }}>
-                    <input type="checkbox" name="secimler" value={topping} onChange={handleToppingChange} checked={secimler.includes(topping)} />
-                    {topping}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-
-  
+        <div style={{ textAlign: "center" }}>
+  <h3>Ek Malzemeler</h3>
+  <p style={{ fontSize: "12px"}}>En fazla 5 malzeme seçebilirsiniz. Her malzeme extra 5 TL.</p>
+  <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center"}}>
+    {availableToppings.map((topping, index) => (
+      <label key={topping} style={{ margin: "1.5rem", padding: "1rem" }}>
+        <input style={{ margin: "0.5rem" }} type="checkbox" name="secimler" value={topping} onChange={handleToppingChange} checked={secimler.includes(topping)} />
+        {topping}
+      </label>
+    ))}
+  </div>
+</div>
+ 
         <div style={{ backgroundColor: "#CE2829", padding: "20px", color: "#FAF7F2", textAlign: "center" }}>
           <h3>Sipariş Toplamı</h3>
           <p>Malzemeler Tutarı : {secimlerPara} TL</p>
@@ -125,7 +123,5 @@ const OrderForm = () => {
   </div>
   );
 };
-
-const availableToppings = ["Pepperoni", "Domates", "Mantar", "Yeşil Zeytin", "Ananas", "Mısır", "Turşu", "Sarımsak", "Sucuk", "Sosis"];
 
 export default OrderForm;
