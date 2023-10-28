@@ -32,13 +32,16 @@ const OrderForm = () => {
 
   const handleToppingChange = (event) => {
     const selectedTopping = event.target.value;
-   
+    if (event.target.checked) {
       if (secimler.length < 5) {
         setSecimler([...secimler, selectedTopping]);
       } else {
         event.target.checked = false;
         alert("En fazla 5 malzeme seçebilirsiniz.");
-          } 
+      }
+    } else {
+      setSecimler(secimler.filter((topping) => topping !== selectedTopping));
+    }
   };
 
   useEffect(() => {
@@ -109,7 +112,11 @@ const OrderForm = () => {
     ))}
   </div>
 </div>
- 
+
+
+
+
+  
         <div style={{ backgroundColor: "#CE2829", padding: "20px", color: "#FAF7F2", textAlign: "center" }}>
           <h3>Sipariş Toplamı</h3>
           <p>Malzemeler Tutarı : {secimlerPara} TL</p>
